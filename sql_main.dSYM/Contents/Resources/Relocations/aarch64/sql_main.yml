@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/aghol/Documents/GitHub/rdbms/sql_main'
+relocations:     []
+...
