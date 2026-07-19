@@ -8,7 +8,7 @@ Parser::Parser()
 
 Parser::Parser(string command)
 {
-    const bool debug = true;
+    const bool debug = false;
 
     build_keywords_map();
     build_command_machine();

@@ -11,15 +11,15 @@ Table::Table(const string& name, const Vector<string> fields)
 {
     // CREATE NEW TABLE
 
-    const bool DEBUG = true;
-    if(DEBUG) cout << "Table ctor fired (new table)" << endl;
+    const bool debug = true;
+    if(debug) cout << "Table ctor fired (new table)" << endl;
 
     table_name = name;
     _fields = fields;
 
 
     //  Build _indices map and _field_order map:
-    if(DEBUG) cout << "Building _indices map and _field_order map..." << endl;
+    if(debug) cout << "Building _indices map and _field_order map..." << endl;
     string field_name;
     MMap<string, int> field_table;
     for(int i = 0; i < fields.size(); i++)  // Create a table for each field
@@ -33,7 +33,7 @@ Table::Table(const string& name, const Vector<string> fields)
         _field_order[field_name] = i;
     }
 
-    if(DEBUG){
+    if(debug){
         cout << "--- _indices vector ---" << endl;
         for(int i=0; i<_indices.size(); i++){
             cout << _fields[i] << endl;
@@ -43,13 +43,13 @@ Table::Table(const string& name, const Vector<string> fields)
     }
 
     // Create empty binary file with same name as this table:
-    if(DEBUG) cout << "Creating new binary file..." << endl;
+    if(debug) cout << "Creating new binary file..." << endl;
     fstream table_file;
     bin_fname = table_name + ".bin";
     open_fileW(table_file, bin_fname.c_str());
 
     // Write field names to a text file:
-    if(DEBUG) cout << "Writing field names to text file..." << endl;
+    if(debug) cout << "Writing field names to text file..." << endl;
     fstream field_names_file;
     fields_fname = table_name + "_field_names.txt";
     open_fileW(field_names_file, fields_fname.c_str());
@@ -151,8 +151,8 @@ Table::Table(const string& name){
 }
 
 void Table::insert_into(Record entry){
-    const bool DEBUG = true;
-    if(DEBUG){
+    const bool debug = true;
+    if(debug){
         cout << "Table::insert_into fired" << endl;
     }
     // 1. Write record to binary file:
@@ -161,7 +161,7 @@ void Table::insert_into(Record entry){
     long recordNumber = entry.write(table);
     // 2. update _indices:
     reindex(entry, recordNumber);
-    if(DEBUG){
+    if(debug){
         cout << "--- _indices ---" << endl;
         for(int i=0; i < _indices.size(); i++){
             cout << _indices[i] << endl;
@@ -171,8 +171,8 @@ void Table::insert_into(Record entry){
 }
 
 Table Table::select(vector<string> command){
-    const bool DEBUG = true;
-    if(DEBUG){
+    const bool debug = true;
+    if(debug){
         cout<<"Table:: select() fired" << endl;
     }
 }
@@ -192,14 +192,14 @@ void Table::get_fields(){
 
 void Table::reindex(Record r, long recNo){
     // Update _indices after adding/deleting a record
-    const bool DEBUG = true;
-    if(DEBUG){
+    const bool debug = true;
+    if(debug){
         cout << "Table::reindex fired" << endl;
     }
     for(int i = 0; i < _fields.size(); i++){
         _indices[i][r.record[i]] += recNo;
     }
-    if(DEBUG){
+    if(debug){
         cout << "reindex successful" << endl;
     }
 }

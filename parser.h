@@ -22,7 +22,7 @@ public:
 private:
     Map<string, int> keywords_map;
     MMap<string, string> parse_tree;
-    enum keywords {ZERO, SELECT, SYMBOL, FROM, MAKE,
+    enum keywords {SUCCESS, SELECT, SYMBOL, FROM, MAKE,
                    TABLE, FIELDS, INSERT, INTO, VALUES, COMMA=','};
     int command_machine[MAX_ROWS][MAX_COLUMNS];
 
