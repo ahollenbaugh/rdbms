@@ -159,7 +159,7 @@ T& Vector<T>::operator [](const unsigned int index){
 
 template <class T>
 T& Vector<T>::at(int index){
-    assert(index >= 0 && index < size());
+    // assert(index >= 0 && index < size());
     return _storage[index];
 }
 

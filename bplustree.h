@@ -436,7 +436,7 @@ void BPlusTree<T>::print_tree(int level, ostream &outs) const{
 template <class T>
 bool BPlusTree<T>::is_valid()
 {
-    const bool debug = true;
+    const bool debug = false;
 
     if(debug){
         cout << "is_valid fired" << endl

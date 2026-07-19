@@ -11,7 +11,7 @@ Table::Table(const string& name, const Vector<string> fields)
 {
     // CREATE NEW TABLE
 
-    const bool debug = true;
+    const bool debug = false;
     if(debug) cout << "Table ctor fired (new table)" << endl;
 
     table_name = name;
@@ -64,7 +64,7 @@ Table::Table(const string& name){
 
     // OPEN EXISTING TABLE
 
-    const bool debug = true;
+    const bool debug = false;
     if(debug) cout << "Table ctor fired (open existing table)" << endl;
 
     table_name = name;
@@ -123,8 +123,10 @@ Table::Table(const string& name){
     // 2. we got the number of characters in the stream
     // (if 0, there's nothing to do)
     while(gcount != 0){
-        cout << "recno: " << record_number << endl;
-        cout << r << endl;
+        if(debug){
+            cout << "recno: " << record_number << endl;
+            cout << r << endl;
+        }
         for(int i=0; i<_fields.size(); i++){
             _indices[i][r.record[i]] += record_number;
             // example: lname -> Hollenbaugh | 24
@@ -151,7 +153,7 @@ Table::Table(const string& name){
 }
 
 void Table::insert_into(Record entry){
-    const bool debug = true;
+    const bool debug = false;
     if(debug){
         cout << "Table::insert_into fired" << endl;
     }
@@ -171,7 +173,7 @@ void Table::insert_into(Record entry){
 }
 
 Table Table::select(vector<string> command){
-    const bool debug = true;
+    const bool debug = false;
     if(debug){
         cout<<"Table:: select() fired" << endl;
     }
@@ -192,7 +194,7 @@ void Table::get_fields(){
 
 void Table::reindex(Record r, long recNo){
     // Update _indices after adding/deleting a record
-    const bool debug = true;
+    const bool debug = false;
     if(debug){
         cout << "Table::reindex fired" << endl;
     }

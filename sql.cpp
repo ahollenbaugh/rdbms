@@ -6,7 +6,7 @@ SQL::SQL()
 }
 
 void SQL::run(){
-    const bool debug = true;
+    const bool debug = false;
 
     string command;
     string c0 = "make table employee fields lname, fname, department, salary";
@@ -14,12 +14,14 @@ void SQL::run(){
     string c2 = "select lname, fname, department, salary from employee";
     string c3 = "insert into employee values Hollenbaugh, Allison, CS, 100000";
     string c4 = "insert into employee values McGee, Peeps, Journalism, 50000";
-    string c5 = "insert into employee values Van Gogh, Jim Bob, Art, 20000";
+    // Don't use c5 for now. Spaces aren't supported yet.
+    // string c5 = "insert into employee values Van Gogh, Jim Bob, Art, 20000";
     string c6 = "select * from employee";
 
     Parser parser(c6);
     MMap<string, string> ptree = parser.get_ptree();
 
+    // Create table
     if(ptree["command"][0]=="make"){
         if(debug){
             cout<<"SQL::run: command == make table"<<endl;
@@ -28,9 +30,10 @@ void SQL::run(){
         Table t(table_name, ptree["fields"]);
     }
 
+    // Select
     if(ptree["command"][0]=="select"){
         string table_name = ptree["table"][0];
-        cout << "table name: " << table_name << endl;
+        if(debug) cout << "table name: " << table_name << endl;
         Table t(table_name);
         // if no conditions:
         if(t._where == false){
@@ -53,6 +56,7 @@ void SQL::run(){
          */
     }
 
+    // Insert data
     if(ptree["command"][0]=="insert"){
         if(debug){
             cout<<"SQL::run: command == insert"<<endl;

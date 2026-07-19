@@ -42,7 +42,7 @@ bool Parser::get_parse_tree(queue<Token> cmd)
      * and runs it through a command state machine
      * in order to generate a parse tree.
      */
-    const bool debug = true;
+    const bool debug = false;
 
     Token token;
 
@@ -176,7 +176,7 @@ int Parser::get_column(Token token)
      * Otherwise, return the SYMBOL column number.
      */
 
-    //const bool debug = true;
+    const bool debug = false;
 
     string tstring = token.token_str();
 

@@ -90,7 +90,7 @@ void print_table(int _table[][MAX_COLUMNS]){
 //hello world   pos: 7
 //       ^
 void show_string(char s[], int _pos){
-    const bool debug = true;
+    const bool debug = false;
     assert(_pos >= 0); // _pos cannot be negative
     if(debug){
         cout <<"state_machine::show_string: strlen(s): "
