@@ -83,3 +83,28 @@ The parse tree would look like this:
 | fields     | lname, fname                                      |
 | where      | yes                                               |
 | conditions | lname = "Garcia Marquez" and country = "Colombia" |
+
+The underlying data structure is a B+ tree. The B+ tree's nodes are Multipairs (key/value pairs where the values are lists, specifically vectors). Note that BPlusTree<MPair<K, V> > is referred to simply as `map_base`. The `MMap` class contains an `Iterator` subclass.
+
+## Table
+### Constructors
+Can either create a new table (given a name and a list of fields), or open an existing one.
+### insert_into
+For adding data to a table.
+### select (WIP)
+Useful if you only want to view data for certain fields. Does not support conditions (yet).
+### select_all (WIP)
+View all fields. Does not support conditions (yet).
+### set_fields
+Sets field names upon table creation.
+### get_fields
+Retrieve a list of a table's fields.
+### reindex
+Updates the `_indices` class member when records are added or deleted. `_indices` is a vector of multimaps. Each index of the vector corresponds to a field name of a particular table. Each multimap consists of multipairs. Each multipair contains a string (field value) mapped to a list of integers (record numbers). For example:
+
+| _indices for employees table | MMap #1                | MMap #2                    | ... |
+|------------------------------|------------------------|----------------------------|-----|
+| first                        | Bill -> 11, 37, 40     | Richard -> [73], 59, 63    | ... |
+| last                         | Harris -> [73], 87, 92 | Johnson -> 18, 38          | ... |
+| department                   | CS -> 22, 38, 54       | Humanities -> 51, [73], 80 | ... |
+| ...                          | ...                    | ...                        | ... |
